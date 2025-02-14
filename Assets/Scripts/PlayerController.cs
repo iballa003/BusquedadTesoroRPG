@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
 
     private Animator animator;
+
+    public LayerMask InteractiveLayer;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -33,8 +35,9 @@ public class PlayerController : MonoBehaviour
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
-
-                StartCoroutine(Move(targetPos));
+                if(isWalkable(targetPos)){
+                    StartCoroutine(Move(targetPos));
+                }
             }
         }
         animator.SetBool("IsMoving", isMoving);
@@ -48,5 +51,11 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = targetPos;
         isMoving = false;
+    }
+
+    private bool isWalkable(Vector3 targetPos){
+        if(Physics2D.OverlapCircle(targetPos, 0.2f, InteractiveLayer) !== null){
+            return false;
+        }
     }
 }
