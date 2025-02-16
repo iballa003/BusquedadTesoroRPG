@@ -35,12 +35,40 @@ public class PlayerController : MonoBehaviour
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
+
                 if(isWalkable(targetPos)){
                     StartCoroutine(Move(targetPos));
                 }
             }
         }
         animator.SetBool("IsMoving", isMoving);
+        if (Input.GetKeyDown(KeyCode.Space)) // Usa la tecla Espacio para probar
+        {
+            StartCoroutine(MoveTileUp());
+        }
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
+        {
+            Interact();
+        }
+    }
+
+    private IEnumerator MoveTileUp()
+    {
+        animator.SetFloat("MoveX", 0);   // No hay movimiento horizontal
+        animator.SetFloat("MoveY", 1);   // Movimiento hacia arriba (Y positivo)
+        animator.SetBool("IsMoving", true); // Activar la animación de movimiento
+        Vector3 targetPos1 = transform.position + Vector3.up; // Primera casilla
+
+        // Mover a la primera casilla
+        if (isWalkable(targetPos1))
+        {
+            yield return StartCoroutine(Move(targetPos1));
+        }
+        else
+        {
+            yield break; // Detener si la primera casilla no es transitable
+        }
+        animator.SetBool("IsMoving", false); // Detener la animación al finalizar
     }
 
     IEnumerator Move(Vector3 targetPos){
@@ -54,8 +82,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool isWalkable(Vector3 targetPos){
-        if(Physics2D.OverlapCircle(targetPos, 0.2f, InteractiveLayer) !== null){
+        if(Physics2D.OverlapCircle(targetPos, 0.2f, InteractiveLayer) != null){
             return false;
+        }
+        return true;
+    }
+
+    private void Interact()
+    {
+        var facingDirection = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var InteractPos = transform.position + facingDirection;
+        var collider = Physics2D.OverlapCircle(InteractPos, 0.2f, InteractiveLayer);
+
+        if (collider != null) {
+            var npc = collider.GetComponent<NPCController>();
+            if (npc != null)
+            {
+                npc.LookAtPlayer(transform.position);
+                Debug.Log("Hola. Soy un NPC");
+            }
         }
     }
 }
