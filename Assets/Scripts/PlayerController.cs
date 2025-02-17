@@ -46,6 +46,12 @@ public class PlayerController : MonoBehaviour
         {
             Interact();
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            moveSpeed = 20;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift)){
+            moveSpeed = 5;
+        }
     }
 
     private IEnumerator MoveTileUp()
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             yield break; // Detener si la primera casilla no es transitable
         }
+        
         animator.SetBool("IsMoving", false); // Detener la animaci�n al finalizar
     }
 
