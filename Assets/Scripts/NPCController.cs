@@ -15,11 +15,11 @@ public class NPCController : MonoBehaviour
 
     public void LookAtPlayer(Vector3 playerPosition)
     {
-        Vector3 direction = playerPosition - transform.position;
-        direction.Normalize();
+        // Vector3 direction = playerPosition - transform.position;
+        // direction.Normalize();
 
-        animator.SetFloat("MoveX", direction.x);
-        animator.SetFloat("MoveY", direction.y);
+        // animator.SetFloat("MoveX", direction.x);
+        // animator.SetFloat("MoveY", direction.y);
     }
 
     public void greeting()

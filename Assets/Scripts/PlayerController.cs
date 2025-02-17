@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     public LayerMask InteractiveLayer;
+
+    public LayerMask ColissionLayer;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,8 +25,6 @@ public class PlayerController : MonoBehaviour
         if(!isMoving){
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
-
-            
 
             if (input != Vector2.zero){
                 //input = input.normalized;
@@ -42,10 +42,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         animator.SetBool("IsMoving", isMoving);
-        if (Input.GetKeyDown(KeyCode.Space)) // Usa la tecla Espacio para probar
-        {
-            StartCoroutine(MoveTileUp());
-        }
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
         {
             Interact();
@@ -56,7 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("MoveX", 0);   // No hay movimiento horizontal
         animator.SetFloat("MoveY", 1);   // Movimiento hacia arriba (Y positivo)
-        animator.SetBool("IsMoving", true); // Activar la animación de movimiento
+        animator.SetBool("IsMoving", true); // Activar la animaciï¿½n de movimiento
         Vector3 targetPos1 = transform.position + Vector3.up; // Primera casilla
 
         // Mover a la primera casilla
@@ -68,7 +64,7 @@ public class PlayerController : MonoBehaviour
         {
             yield break; // Detener si la primera casilla no es transitable
         }
-        animator.SetBool("IsMoving", false); // Detener la animación al finalizar
+        animator.SetBool("IsMoving", false); // Detener la animaciï¿½n al finalizar
     }
 
     IEnumerator Move(Vector3 targetPos){
@@ -82,7 +78,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool isWalkable(Vector3 targetPos){
-        if(Physics2D.OverlapCircle(targetPos, 0.2f, InteractiveLayer) != null){
+        if(Physics2D.OverlapCircle(targetPos, 0.2f, InteractiveLayer) != null || Physics2D.OverlapCircle(targetPos, 0.2f, ColissionLayer) != null){
             return false;
         }
         return true;
@@ -98,8 +94,9 @@ public class PlayerController : MonoBehaviour
             var npc = collider.GetComponent<NPCController>();
             if (npc != null)
             {
-                npc.LookAtPlayer(transform.position);
-                Debug.Log("Hola. Soy un NPC");
+                //npc.LookAtPlayer(transform.position);
+                Debug.Log("Conseguiste las llaves");
+                GameManager.instance.getKey = true;
             }
         }
     }
