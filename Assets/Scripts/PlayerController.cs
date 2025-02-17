@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
             
 
             if (input != Vector2.zero){
-                input = input.normalized;
+                //input = input.normalized;
 
                 animator.SetFloat("MoveX", input.x);
                 animator.SetFloat("MoveY", input.y);
