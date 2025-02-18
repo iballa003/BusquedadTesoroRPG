@@ -14,6 +14,8 @@ public class CountdownTimer : MonoBehaviour
     public TMP_Text tmpTimerText;
 
     private bool isCounting = true;
+    private bool isPaused = false; // Nueva variable para pausar
+
 
     private void Awake()
     {
@@ -40,9 +42,16 @@ public class CountdownTimer : MonoBehaviour
     {
         while (countdownTime > 0 && isCounting)
         {
-            UpdateTimerUI();
-            yield return new WaitForSeconds(1f);
-            countdownTime--;
+            if (!isPaused) // Solo reduce el tiempo si no está en pausa
+            {
+                UpdateTimerUI();
+                yield return new WaitForSeconds(1f);
+                countdownTime--;
+            }
+            else
+            {
+                yield return null; // Esperar hasta que isPaused sea false
+            }
         }
 
         if (countdownTime <= 0)
@@ -92,6 +101,11 @@ public class CountdownTimer : MonoBehaviour
 
             UpdateTimerUI(); // Actualizar el tiempo en la nueva escena
         }
+    }
+
+    public void PauseTimer()
+    {
+        isPaused = true;
     }
 }
 

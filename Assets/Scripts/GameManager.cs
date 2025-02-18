@@ -132,10 +132,15 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("treasure"))
         {
             Debug.Log("Salir");
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("EndGame");
+            GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+
             foreach (GameObject obj in objects)
             {
-                obj.SetActive(true); // Activa cada objeto encontrado
+                if (obj.CompareTag("EndGame")) // Verifica si el objeto tiene el tag correcto
+                {
+                    CountdownTimer.instance.PauseTimer();
+                    obj.SetActive(true);
+                }
             }
             Debug.Log(objects.Length + " objetos activados con tag");
 
