@@ -10,20 +10,18 @@ public class NPCController : MonoBehaviour
     public UnityEvent onInteract;
     void Start()
     {
-        animator = GetComponent<Animator>();
+       
     }
 
-    public void LookAtPlayer(Vector3 playerPosition)
+    public void action()
     {
-        // Vector3 direction = playerPosition - transform.position;
-        // direction.Normalize();
-
-        // animator.SetFloat("MoveX", direction.x);
-        // animator.SetFloat("MoveY", direction.y);
-    }
-
-    public void greeting()
-    {
-
+        if (onInteract != null)
+        {
+            onInteract.Invoke(); // Llama a los eventos asignados en el Inspector
+        }
+        else
+        {
+            Debug.Log("No hay acción asignada para este NPC.");
+        }
     }
 }

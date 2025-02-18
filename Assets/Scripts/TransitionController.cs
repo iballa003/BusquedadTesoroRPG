@@ -7,21 +7,34 @@ using UnityEngine.UI;
 public class TransitionController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Image fadePanel; // Referencia al panel oscuro
-    public float fadeDuration = 2f; // Duración de la transición
+    public Image fadePanel;
+    public float fadeDuration = 2f;
+    public Vector2 spawnPosition;
 
     private void Start()
     {
-        // Iniciar la transición de entrada (de oscuro a claro)
         if (SceneManager.GetActiveScene().name != "Title")
         {
             StartCoroutine(FadeIn());
+            if (PlayerPrefs.HasKey("SpawnX") && PlayerPrefs.HasKey("SpawnY"))
+            {
+                float x = PlayerPrefs.GetFloat("SpawnX");
+                float y = PlayerPrefs.GetFloat("SpawnY");
+
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    player.transform.position = new Vector2(x, y);
+                }
+            }
         }
     }
 
-    public void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName, Vector2 newSpawnPosition)
     {
-        // Iniciar la transición de salida (de claro a oscuro) y cambiar de escena
+        PlayerPrefs.SetFloat("SpawnX", newSpawnPosition.x);
+        PlayerPrefs.SetFloat("SpawnY", newSpawnPosition.y);
+        PlayerPrefs.Save(); // Guardar los datos
         StartCoroutine(FadeOut(sceneName));
     }
 
@@ -53,6 +66,7 @@ public class TransitionController : MonoBehaviour
         }
 
         // Cambiar de escena después de la transición
+        
         SceneManager.LoadScene(sceneName);
     }
 }

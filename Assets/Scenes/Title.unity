@@ -563,7 +563,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 594385757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 661516595}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &594385757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,6 +1214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 1515465579}
   fadeDuration: 2
+  spawnPosition: {x: 0, y: 0}
 --- !u!1 &1953885539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,6 +1336,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 772341431}
   clickSound: {fileID: 8300000, guid: 4e4ae6538a5e61143929987719a0fbe2, type: 3}
+  keysSound: {fileID: 8300000, guid: 5106416a3e9ca4743ba4012e169e2afd, type: 3}
+  closeDoorSound: {fileID: 0}
+  unlockDoorSound: {fileID: 0}
+  openDoorSound: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

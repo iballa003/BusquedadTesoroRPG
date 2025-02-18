@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float moveSpeed;
+    public float shiftMoveSpeed;
     private bool isMoving;
     private Vector2 input;
 
@@ -44,10 +45,11 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsMoving", isMoving);
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
         {
+            
             Interact();
         }
         if(Input.GetKeyDown(KeyCode.LeftShift)){
-            moveSpeed = 20;
+            moveSpeed = shiftMoveSpeed;
         }
         if(Input.GetKeyUp(KeyCode.LeftShift)){
             moveSpeed = 5;
@@ -101,9 +103,7 @@ public class PlayerController : MonoBehaviour
             var npc = collider.GetComponent<NPCController>();
             if (npc != null)
             {
-                //npc.LookAtPlayer(transform.position);
-                Debug.Log("Conseguiste las llaves");
-                GameManager.instance.getKey = true;
+                npc.action();
             }
         }
     }

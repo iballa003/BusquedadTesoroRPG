@@ -5,15 +5,24 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    void Start()
+    {
+        PlayerPrefs.DeleteAll();
+    }
     public void NewGameButton()
     {
         AudioManager.instance.PlayConfirmSound();
-        FindObjectOfType<TransitionController>().ChangeScene("Main");
+        FindObjectOfType<TransitionController>().ChangeScene("Main", new Vector2(-0.95f, -7.44f));
     }
 
-    private IEnumerator Wait(float waitTime)
+    public void ExitButton()
     {
-
-        yield return new WaitForSeconds(waitTime);
+        AudioManager.instance.PlayConfirmSound();
+        Application.Quit();
     }
+
+    
+
+
 }

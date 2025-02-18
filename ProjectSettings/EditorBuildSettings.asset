@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 882701ed56b8f5971bfd9aa5328ab9e6
+  - enabled: 1
+    path: Assets/Scenes/Main_inside.unity
+    guid: 968bfc3b62c9d0d4da016c3a7a0bf996
+  - enabled: 1
+    path: Assets/Scenes/Main_secretary.unity
+    guid: def88f712a7459d449d27d57121ed423
+  - enabled: 1
+    path: Assets/Scenes/storage.unity
+    guid: 4476633aac6d31342955332da3437660
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 1f8c13610244c0a4ab4cc7355d07f97a
   m_configObjects: {}

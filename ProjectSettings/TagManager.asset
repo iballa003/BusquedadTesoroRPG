@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Shovel
+  - Keys
+  - Treasure
+  - EndGame
   layers:
   - Default
   - TransparentFX
