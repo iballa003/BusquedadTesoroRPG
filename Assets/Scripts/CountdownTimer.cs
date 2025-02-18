@@ -16,10 +16,8 @@ public class CountdownTimer : MonoBehaviour
     private bool isCounting = true;
     private bool isPaused = false; // Nueva variable para pausar
 
-
     private void Awake()
     {
-        // Asegurar que solo haya un temporizador activo
         if (instance == null)
         {
             instance = this;
@@ -42,7 +40,7 @@ public class CountdownTimer : MonoBehaviour
     {
         while (countdownTime > 0 && isCounting)
         {
-            if (!isPaused) // Solo reduce el tiempo si no está en pausa
+            if (!isPaused)
             {
                 UpdateTimerUI();
                 yield return new WaitForSeconds(1f);
@@ -50,7 +48,7 @@ public class CountdownTimer : MonoBehaviour
             }
             else
             {
-                yield return null; // Esperar hasta que isPaused sea false
+                yield return null;
             }
         }
 
@@ -81,25 +79,32 @@ public class CountdownTimer : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Si la escena cargada es "GameOver", destruir el temporizador
         if (scene.name == sceneToLoad || scene.name == "Title")
         {
-            Destroy(gameObject); // Destruye el temporizador
+            Destroy(gameObject); // Destruye el temporizador si es GameOver
         }
         else
         {
-            // Si no es GameOver, reasignar la UI
+            // Buscar específicamente el texto del temporizador sin afectar otras UI
             if (timerText == null)
             {
-                timerText = FindObjectOfType<Text>();
+                GameObject timerObject = GameObject.Find("TimerText");
+                if (timerObject != null)
+                {
+                    timerText = timerObject.GetComponent<Text>();
+                }
             }
 
             if (tmpTimerText == null)
             {
-                tmpTimerText = FindObjectOfType<TMP_Text>();
+                GameObject tmpTimerObject = GameObject.Find("TMP_TimerText");
+                if (tmpTimerObject != null)
+                {
+                    tmpTimerText = tmpTimerObject.GetComponent<TMP_Text>();
+                }
             }
 
-            UpdateTimerUI(); // Actualizar el tiempo en la nueva escena
+            UpdateTimerUI();
         }
     }
 
@@ -108,6 +113,7 @@ public class CountdownTimer : MonoBehaviour
         isPaused = true;
     }
 }
+
 
 
 

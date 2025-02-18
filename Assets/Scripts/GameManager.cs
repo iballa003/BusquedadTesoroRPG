@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     public void GetDoorKey()
     {
-        if (!PlayerPrefs.HasKey("keys")) { 
+        if (!PlayerPrefs.HasKey("keys")) {
+            GuidanceTextManager.instance.ShowMessage("¡Conseguistes las llaves de la entrada principal! Ahora dirígete a secretaría.");
             Debug.Log("¡Conseguistes las llaves de la entrada!");
             AudioManager.instance.PlayKeysSound();
             PlayerPrefs.SetString("keys", "true");
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("storagekeys"))
         {
+            GuidanceTextManager.instance.ShowMessage("¡Conseguistes las llaves del trastero! Ahora ve al exterior y encuentra la puerta al noreste.");
             Debug.Log("¡Conseguistes las llaves del trastero!");
             AudioManager.instance.PlayKeysSound();
             PlayerPrefs.SetString("storagekeys", "true");
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour
     public void GetTreasure()
     {
             Debug.Log("¡Conseguistes el tesoro!");
-            AudioManager.instance.PlayKeysSound();
+        GuidanceTextManager.instance.ShowMessage("¡Conseguistes el tesoro! ¡Ahora escapa del centro antes de que se acabe el tiempo!");
+        AudioManager.instance.PlayKeysSound();
             GameObject treasureObject = GameObject.FindGameObjectWithTag("Treasure");
             if (treasureObject != null)
             {
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("keys"))
         {
             AudioManager.instance.PlayCloseDoorSound();
+            GuidanceTextManager.instance.ShowMessage("Cerrado. Encuentra la llave en alguna papelera.");
             Debug.Log("Cerrado. Encuentra la llave en alguna papelera");
         }
         else
