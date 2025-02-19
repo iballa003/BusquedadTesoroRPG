@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float moveSpeed;
-    public float shiftMoveSpeed;
+    private float shiftMoveSpeed = 7f;
     private bool isMoving;
     private Vector2 input;
 

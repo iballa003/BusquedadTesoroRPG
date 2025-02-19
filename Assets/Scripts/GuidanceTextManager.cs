@@ -6,7 +6,7 @@ public class GuidanceTextManager : MonoBehaviour
 {
     public static GuidanceTextManager instance; // Singleton para accederlo desde otros scripts
     public TMP_Text guidanceText; // Referencia al TextMeshPro en la UI
-    private float messageDuration = 3f; // Duración del mensaje en pantalla
+    private float messageDuration = 5f; // Duración del mensaje en pantalla
 
     private void Awake()
     {
@@ -32,10 +32,9 @@ public class GuidanceTextManager : MonoBehaviour
     {
         AssignGuidanceText();
         // Llamar al mensaje de bienvenida después de 1 segundo
-        messageDuration = 5f;
         if (!PlayerPrefs.HasKey("firstNotification")){ 
             Invoke(nameof(ShowStartNotification), 1f);
-            messageDuration = 3f;
+            Invoke(nameof(ShowControllersNotification), 7f);
             PlayerPrefs.SetString("firstNotification", "true");
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -66,7 +65,12 @@ public class GuidanceTextManager : MonoBehaviour
 
     private void ShowStartNotification()
     {
-        ShowMessage("¡Bienvenido! Encuentra el tesoro antes de que se acabe el tiempo. La primera llave se encuentra en una papelera del patio.");
+        ShowMessage("¡Bienvenid@! Encuentra el tesoro antes de que se acabe el tiempo. La primera llave se encuentra en una papelera del patio.");
+    }
+
+    private void ShowControllersNotification()
+    {
+        ShowMessage("Te puedes mover con la flechas.\nShift izquierdo para correr.\nEnter o z para interactuar.");
     }
 
     public void ShowMessage(string message)

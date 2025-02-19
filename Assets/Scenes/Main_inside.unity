@@ -1799,7 +1799,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1936,12 +1936,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4bdfd3a224b48438bd3faf0caea0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 0}
   audioSource: {fileID: 718441704}
   clickSound: {fileID: 8300000, guid: 4e4ae6538a5e61143929987719a0fbe2, type: 3}
   keysSound: {fileID: 8300000, guid: 5106416a3e9ca4743ba4012e169e2afd, type: 3}
   closeDoorSound: {fileID: 8300000, guid: 378cb649a48467642967b2689ed9a7e6, type: 3}
   unlockDoorSound: {fileID: 8300000, guid: 0108581c5c29014468d7084ca8e296f9, type: 3}
   openDoorSound: {fileID: 8300000, guid: 93dd7be2bbccc5c4bb1af0defa05f868, type: 3}
+  musicSource: {fileID: 0}
 --- !u!4 &1706084490
 Transform:
   m_ObjectHideFlags: 0
@@ -2317,10 +2319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 880, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -21,7 +21,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("treasure"))
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            AudioManager.instance.PlayAmbientMusic();
+        }
+
+            if (PlayerPrefs.HasKey("treasure"))
         {
             string hasTreasure = PlayerPrefs.GetString("treasure");
             if (hasTreasure == "true") {
@@ -73,7 +78,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("keys"))
         {
             AudioManager.instance.PlayCloseDoorSound();
-            GuidanceTextManager.instance.ShowMessage("Cerrado. Encuentra la llave en alguna papelera.");
+            GuidanceTextManager.instance.ShowMessage("Cerrado. La llave debe estar en alguna papelera.");
             Debug.Log("Cerrado. Encuentra la llave en alguna papelera");
         }
         else
@@ -120,6 +125,7 @@ public class GameManager : MonoBehaviour
         else
         {
             AudioManager.instance.PlayCloseDoorSound();
+            GuidanceTextManager.instance.ShowMessage("Está cerrado. Necesito la llaves del trastero que están en secretaría.");
             Debug.Log("Está cerrado. Necesito la llaves del trastero que están en secretaría.");
         }
     }
@@ -143,14 +149,15 @@ public class GameManager : MonoBehaviour
                 if (obj.CompareTag("EndGame")) // Verifica si el objeto tiene el tag correcto
                 {
                     CountdownTimer.instance.PauseTimer();
+                    AudioManager.instance.StopMusic();
                     obj.SetActive(true);
                 }
             }
-            Debug.Log(objects.Length + " objetos activados con tag");
 
         }
         else
         {
+            GuidanceTextManager.instance.ShowMessage("Todavía no has encontrado el tesoro. Explora el instituto para encontrarlo.");
             Debug.Log("Todavía no has encontrado el tesoro");
         }
     }

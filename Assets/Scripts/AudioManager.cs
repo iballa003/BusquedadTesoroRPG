@@ -6,13 +6,33 @@ public class AudioManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static AudioManager instance;
+    public AudioClip backgroundMusic;
     public AudioSource audioSource;
     public AudioClip clickSound;
     public AudioClip keysSound;
     public AudioClip closeDoorSound;
     public AudioClip unlockDoorSound;
     public AudioClip openDoorSound;
+    public AudioSource musicSource; // Para la música de fondo
 
+    public void PlayAmbientMusic()
+    {
+        if (backgroundMusic != null)
+        {
+            musicSource.clip = backgroundMusic;
+            musicSource.volume = 0.05f; // Ajusta el volumen si es necesario
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogError("No se ha asignado un AudioClip de música.");
+        }
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
     public void PlayConfirmSound()
     {
         audioSource.PlayOneShot(clickSound);
@@ -52,14 +72,4 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
